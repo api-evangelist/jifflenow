@@ -1,8 +1,26 @@
 aid: jifflenow
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/jifflenow.png
 name: Jifflenow
-description: 'Jifflenow is a company surfaced as a portfolio company of accel and added to the API Evangelist
-  network as a stub for enrichment. Sector: automation. This profile is a lead awaiting the enrichment
-  pipeline.'
+description: 'Jifflenow is a B2B meeting automation and scheduling platform for trade shows, conferences,
+  and corporate events, now part of Cvent (acquired 2021) as Cvent Jifflenow. It lets sales and event
+  teams request, approve, and confirm meetings before attendees arrive on the show floor, with automated
+  routing and notifications, a unified calendar that combines customer meetings and internal staff
+  activities, on-site mobile check-in and no-show tracking, and reporting dashboards that tie meeting
+  volume and outcomes back to pipeline. It integrates with Salesforce (native CRM sync of accounts,
+  opportunities, campaigns, and leads), Outlook, and iCapture badge scanning. The standalone
+  jifflenow.com now redirects to Cvent; there is no public first-party developer API, SDK, or
+  documentation surface for Jifflenow as a distinct product.'
 url: https://raw.githubusercontent.com/api-evangelist/jifflenow/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,10 +30,17 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
 - Automation
+- Events
+- Meetings
+- Scheduling
+- Event Marketing
+- B2B
+- Sales
+- Trade Shows
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -23,5 +48,16 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Compliance
+  url: https://www.cvent.com/en/trust
+- type: TrustCenter
+  url: security/jifflenow-trust-center.yml
+- type: DomainSecurity
+  url: security/jifflenow-domain-security.yml
 - type: Website
-  url: http://www.jifflenow.com
+  url: https://www.jifflenow.com
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
