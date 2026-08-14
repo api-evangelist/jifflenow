@@ -1,15 +1,21 @@
 aid: jifflenow
 accessModel:
-  pricing: unknown
-  onboarding: unknown
+  pricing: contact-sales
+  onboarding: tenant-admin
   trial: false
   try_now: false
   public: false
-  label: Unknown
-  confidence: low
-  source: []
-  generated: '2026-07-22'
-  method: derived
+  label: Docs public, access sales-gated
+  confidence: high
+  source:
+  - https://developers.cvent.com/docs/legacy-api/jifflenow-api/introduction
+  - https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started
+  generated: '2026-08-13'
+  method: searched
+  note: >-
+    The full API reference is publicly readable with no account. Credentials are not: Jifflenow is
+    sold as a Cvent add-on license, and a tenant admin with the "Can manage integrations" privilege
+    mints the Client ID/Secret/Subdomain inside the product.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/jifflenow.png
 name: Jifflenow
 description: 'Jifflenow is a B2B meeting automation and scheduling platform for trade shows, conferences,
@@ -19,8 +25,12 @@ description: 'Jifflenow is a B2B meeting automation and scheduling platform for 
   activities, on-site mobile check-in and no-show tracking, and reporting dashboards that tie meeting
   volume and outcomes back to pipeline. It integrates with Salesforce (native CRM sync of accounts,
   opportunities, campaigns, and leads), Outlook, and iCapture badge scanning. The standalone
-  jifflenow.com now redirects to Cvent; there is no public first-party developer API, SDK, or
-  documentation surface for Jifflenow as a distinct product.'
+  jifflenow.com now redirects to Cvent, but the Jifflenow REST API remains live and publicly
+  documented on the acquirer''s developer portal at developers.cvent.com under its legacy-API
+  section: roughly twenty JSON operations over events, meetings, sessions, meeting types, users,
+  calendar blocks, event topics, badge-scan ingestion, and shared meeting links, served from a
+  per-tenant https://<companyname>.jifflenow.com/api host and secured with OAuth 2.0 client
+  credentials. No OpenAPI, SDK, webhook surface, or agent surface is published for it.'
 url: https://raw.githubusercontent.com/api-evangelist/jifflenow/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -30,7 +40,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-19'
+modified: '2026-08-13'
 tags:
 - Company
 - Automation
@@ -41,7 +51,45 @@ tags:
 - B2B
 - Sales
 - Trade Shows
-apis: []
+- Meeting Automation
+- Appointments
+- Badge Scanning
+apis:
+- name: Jifflenow REST API
+  description: >-
+    The Jifflenow REST API exposes the meeting-automation core of Cvent Jifflenow as JSON over
+    HTTPS. Documented modules cover user management (list users, push users into an event, block a
+    user's calendar), meeting management (meeting entities, meeting-centric and user-centric
+    meeting lists, meeting types, sessions), event management (list, create and update events),
+    badge-scan ingestion from third-party scanners at company and event level, event topics, and
+    shared meeting links for eCampaign events. Operations sit under /api/adapter on a per-tenant
+    subdomain and are scoped to one event by an {event_system_name} path segment. Authentication is
+    OAuth 2.0 client credentials against /api/oauth/token, returning a 30-minute Bearer token.
+    Cvent files it under "Legacy API"; no OpenAPI is published.
+  humanURL: https://developers.cvent.com/docs/legacy-api/jifflenow-api/introduction
+  baseURL: https://<companyname>.jifflenow.com/api
+  tags:
+  - Meetings
+  - Events
+  - Scheduling
+  - Users
+  - Sessions
+  - Badge Scanning
+  properties:
+  - type: Documentation
+    url: https://developers.cvent.com/docs/legacy-api/jifflenow-api/introduction
+  - type: APIReference
+    url: https://developers.cvent.com/docs/legacy-api/jifflenow-api/api-request-response
+  - type: GettingStarted
+    url: https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started
+  - type: Authentication
+    url: authentication/jifflenow-authentication.yml
+  - type: OAuthTokenEndpoint
+    url: https://<companyname>.jifflenow.com/api/oauth/token
+  - type: SingleSignOn
+    url: https://developers.cvent.com/docs/sso/configuration/jifflenow
+  - type: SalesforceApp
+    url: https://developers.cvent.com/docs/jifflenow-salesforce/setup
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -56,8 +104,57 @@ common:
   url: security/jifflenow-domain-security.yml
 - type: Website
   url: https://www.jifflenow.com
+- type: DeveloperPortal
+  url: https://developers.cvent.com/
+- type: Documentation
+  url: https://developers.cvent.com/docs/legacy-api/jifflenow-api/introduction
+- type: APIReference
+  url: https://developers.cvent.com/docs/legacy-api/jifflenow-api/api-request-response
+- type: GettingStarted
+  url: https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started
+- type: Support
+  url: https://support.cvent.com/
+- type: Pricing
+  url: https://www.cvent.com/en/event-management-software/cvent-pricing
+- type: TermsOfService
+  url: https://www.cvent.com/en/company/legal
+- type: PrivacyPolicy
+  url: https://www.cvent.com/en/privacy-policy
+- type: StatusPage
+  url: https://status.cvent.com
+- type: Authentication
+  url: authentication/jifflenow-authentication.yml
+- type: OAuthScopes
+  url: scopes/jifflenow-scopes.yml
+- type: Conventions
+  url: conventions/jifflenow-conventions.yml
+- type: ErrorCatalog
+  url: errors/jifflenow-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/jifflenow-lifecycle.yml
+- type: DataModel
+  url: data-model/jifflenow-data-model.yml
+- type: Sandbox
+  url: sandbox/jifflenow-sandbox.yml
+- type: Conformance
+  url: conformance/jifflenow-conformance.yml
+- type: Plans
+  url: plans/jifflenow-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/jifflenow-rate-limits.yml
+- type: Packages
+  url: packages/jifflenow-packages.yml
+- type: LLMsTxt
+  url: llms/jifflenow-llms.txt
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 13
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
+  note: >-
+    Contract discovery beat the redirect. jifflenow.com 302s to Cvent, but the live Jifflenow REST
+    API reference was found on the acquirer's portal at
+    developers.cvent.com/docs/legacy-api/jifflenow-api/ by reading the Next.js route manifest; 20
+    operation pages were harvested into authentication, scopes, conventions, errors, lifecycle,
+    data-model, sandbox, conformance, plans, rate-limits, packages and llms artifacts. No OpenAPI,
+    no .well-known document, no MCP server, no agent card, no SDK, no webhooks.
