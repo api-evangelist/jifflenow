@@ -1,0 +1,19 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/introduction
+plan_count: 0
+plans: []
+pricing_model: contact-sales
+note: >-
+  Jifflenow publishes no plans, tiers, quotas or list prices, and neither does Cvent for this
+  product. The API documentation states plainly: "Jifflenow is available as an add-on license.
+  Contact your Cvent account representative for more information." The Cvent pricing page
+  (https://www.cvent.com/en/event-management-software/cvent-pricing) is a request-a-quote form with
+  no published numbers, and Cvent Jifflenow is sold as an add-on to it. API access itself carries no
+  separate published price — it is enabled inside a licensed Jifflenow tenant by an admin with the
+  "Can manage integrations" privilege. plan_count: 0 is a measured absence, not a gap in the probe.
+evidence:
+  - url: https://developers.cvent.com/docs/legacy-api/jifflenow-api/introduction
+    status: 200
+  - url: https://www.cvent.com/en/event-management-software/cvent-pricing
+    status: 200

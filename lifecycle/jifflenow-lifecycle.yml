@@ -1,0 +1,46 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/introduction
+versioning:
+  scheme: none
+  current: null
+  docs: https://developers.cvent.com/docs/legacy-api/jifflenow-api/api-request-response
+  note: >-
+    Documented paths carry no version segment and the docs describe no version header or train.
+classification:
+  vendor_label: Legacy API
+  evidence: >-
+    Cvent files the entire Jifflenow reference under developers.cvent.com/docs/legacy-api/
+    alongside the SOAP API, BadgeKit and CSN. It is still documented and still callable; "legacy"
+    is Cvent's own shelf label, not a sunset announcement.
+  url: https://developers.cvent.com/docs/legacy-api/jifflenow-api/introduction
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecated_features:
+    - feature: OAuth 2.0 Authorization Code Grant
+      status: deprecated
+      guidance: >-
+        "Authorization Code Grant is deprecated. All new integrations should use the Client
+        Credentials Flow for enhanced security and simplified access management."
+      source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started
+  note: >-
+    A named deprecation exists inside the docs (the authorization-code flow) but Cvent publishes no
+    deprecation POLICY for this API — no notice window, no Sunset/Deprecation header support, no
+    migration timeline. Only the auth-flow deprecation is recorded here.
+sla:
+  url: null
+  uptime_target: null
+status_page: https://status.cvent.com
+status_page_note: >-
+  Cvent's platform status page, inherited by Jifflenow as a Cvent product. Jifflenow does not
+  operate a separate status page; jifflenow.com redirects to cvent.com.
+ownership:
+  acquired_by: Cvent
+  acquired: 2021
+  product_name: Cvent Jifflenow
+  product_page: https://www.cvent.com/en/event-marketing-management/cvent-jifflenow
+  licensing_note: >-
+    "Jifflenow is available as an add-on license. Contact your Cvent account representative for more
+    information." (docs introduction)
+deprecated_operations: []

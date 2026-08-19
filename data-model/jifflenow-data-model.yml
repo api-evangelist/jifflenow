@@ -1,0 +1,106 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/introduction
+note: >-
+  Derived by reading the published response-field tables on all 20 Jifflenow API reference pages.
+  There is no OpenAPI to derive $ref links from, so relationships below are read from documented
+  id-reference fields and from the request paths that scope one entity under another. Field lists
+  are the documented top-level members of each collection, not exhaustive object schemas.
+identifiers:
+  primary: uuid (RFC 4122 UUID) on every entity
+  event_scope_key: event_system_name
+  event_scope_note: >-
+    A human-readable slug, not a UUID. It appears as a path segment on most operations and is copied
+    out of the event URL when the integration is configured.
+  external_ids:
+    - events.event_external_id
+    - users.external_id
+entities:
+  - name: event
+    collection: data.events
+    id: uuid
+    alt_id: event_system_name
+    fields: [event_name, event_system_name, start_date, end_date, location, time_zone, status,
+             stage, event_type, uuid, event_external_id, business_unit, region, purchase_order]
+    enums:
+      status: [LIVE, PAST]
+      stage: [PRODUCTION, SANDBOX]
+      event_type: [EEVENT, ECAMPAIGN]
+    operations: [Events List, Create Event, Update Event]
+  - name: user
+    collection: data.users
+    id: uuid
+    fields: [first_name, last_name, email, alias_email, alias_users, company_name, company_role,
+             title, contact_no, role, user_type, active, status, invite_status, registered, no_show,
+             mode_of_attendance, personal_link, external_id, custom_fields, consent, consents,
+             consent_details, timezone, block_id, start_time, end_time, meetings, message,
+             created_at, updated_at]
+    operations: [Users List, Users Push, User Calendar Block]
+  - name: meeting
+    collection: data.meetings
+    id: uuid
+    fields: [id, uuid, status, start_time, end_time, location, meeting_with, attendees, activity,
+             utm_fields]
+    operations: [Meetings Entity, Meetings List (Meeting Centric), Meetings List (User Centric),
+                 Meetings List (By User)]
+  - name: meeting_request
+    collection: data.meeting_requests
+    id: id
+    fields: [id, activity_id, status, meeting_with, meeting_time_zone, topic_uuid, vcon,
+             utm_fields, created_at, updated_at]
+    operations: [Meetings List (User Centric)]
+  - name: meeting_type
+    collection: data.meeting_types
+    id: uuid
+    fields: [uuid, name, display_name, active, location_id, default_roles, enable_meeting_host,
+             meeting_host_label, atleast_one_meeting_host, assign_requestors_as_meeting_host_by_default,
+             can_edit_approved_meeting, mapping_enabled, meeting_type_master_name,
+             meeting_type_master_uuid]
+    operations: [Meeting Type List]
+  - name: session
+    collection: data.sessions
+    id: id
+    fields: [id, session, session_abstract, start_time, end_time, location, status, topic,
+             track_name, attendees, additional_info, marketo_program_name]
+    operations: [Sessions List]
+  - name: topic
+    collection: data.topics
+    id: uuid
+    fields: [uuid, name, description, active, disable_in_meeting, mapped_meeting_types, mapped_users]
+    operations: [Event Topics]
+  - name: shared_link
+    collection: data.shared_links
+    id: shared_link_uuid
+    fields: [uuid, id, shared_link, shared_link_uuid, link, link_uuid, link_type, link_status,
+             link_custom_fields, requestor, participants, meeting_with, meeting_type, topic,
+             location, timezone, shared_from_date, shared_to_date, expires_at, expired, vcon,
+             preferred_vcon_link, comments, created_at, updated_at]
+    scope: eCampaign events
+    operations: [Shared Link Create, Shared Link Update, Shared Link Cancel, Shared Link Retrieval]
+  - name: badge_scan
+    collection: null
+    id: null
+    note: >-
+      Write-only ingestion surface. Pushes scanned-user records from third-party badge scanners
+      (Captello, Stova, Alliance Tech / ITN are the vendors the docs name) into Jifflenow at company
+      or event level. No read operation is published.
+    operations: [Company-Level Badge Scan, Event-Level Badge Scan]
+relationships:
+  - {from: meeting, to: event, type: belongs_to, via: event_system_name path segment}
+  - {from: session, to: event, type: belongs_to, via: event_system_name path segment}
+  - {from: meeting_type, to: event, type: belongs_to, via: event_system_name path segment}
+  - {from: topic, to: event, type: belongs_to, via: event_system_name path segment}
+  - {from: shared_link, to: event, type: belongs_to, via: event_system_name path segment}
+  - {from: user, to: event, type: belongs_to, via: event_system_name path segment (Users Push)}
+  - {from: meeting_request, to: topic, type: belongs_to, via: topic_uuid}
+  - {from: meeting, to: user, type: has_many, via: attendees}
+  - {from: session, to: user, type: has_many, via: attendees}
+  - {from: user, to: meeting, type: has_many, via: meetings}
+  - {from: topic, to: meeting_type, type: has_many, via: mapped_meeting_types}
+  - {from: topic, to: user, type: has_many, via: mapped_users}
+  - {from: meeting_type, to: meeting_type, type: belongs_to, via: meeting_type_master_uuid}
+  - {from: shared_link, to: user, type: has_one, via: requestor}
+  - {from: shared_link, to: user, type: has_many, via: participants}
+  - {from: shared_link, to: meeting_type, type: belongs_to, via: meeting_type}
+  - {from: shared_link, to: topic, type: belongs_to, via: topic}
+  - {from: user, to: user, type: has_many, via: alias_users}

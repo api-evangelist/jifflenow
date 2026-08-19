@@ -1,0 +1,40 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/event/events-list
+note: >-
+  Jifflenow has a real test/live separation, but it is a property of the EVENT, not of the API
+  credential. There is no separate sandbox host, no test-mode key prefix, and no published test
+  fixtures or magic values. An event is created in either PRODUCTION or SANDBOX stage; sandbox
+  events are excluded from list results unless the caller opts in.
+separation:
+  model: per-event stage flag
+  key_prefixes: []
+  hosts:
+    live: https://<companyname>.jifflenow.com/api
+    sandbox: https://<companyname>.jifflenow.com/api
+  host_note: Same host and same credentials for both stages.
+stage_field:
+  field: data.events[].stage
+  type: string (enum)
+  values: [PRODUCTION, SANDBOX]
+  source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/event/events-list
+opt_in_parameter:
+  name: 'api_params[include_sandbox]'
+  in: query
+  type: boolean
+  default: false
+  description: Include events created in sandbox mode.
+  operation: GET /api/adapter/events_list
+  source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/event/events-list
+instance_mode:
+  field: mode of instance
+  values: [sandbox, production]
+  source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/event/create-event
+test_values: []
+test_clocks: false
+fixtures: false
+gaps:
+  - No published test credentials, test data set, or magic identifiers.
+  - No hosted console, playground, or "try it" widget in the reference.
+  - Credentials are only obtainable inside a licensed tenant, so the sandbox is not open to
+    prospective integrators evaluating the API.

@@ -1,0 +1,18 @@
+generated: '2026-08-13'
+method: searched
+source: registry searches 2026-08-13
+package_count: 0
+packages: []
+note: >-
+  No first-party Jifflenow client library exists in any public registry. Searched npm
+  (registry.npmjs.org search "jifflenow" -> 0 objects), PyPI (pypi.org/pypi/jifflenow/json -> 404
+  Not Found), RubyGems (api/v1/gems/jifflenow.json -> not found), and GitHub repository search
+  ("jifflenow" -> 17 repos, all third-party personal projects; there is no jifflenow GitHub
+  organization and github.com/cvent publishes nothing Jifflenow-related). The Jifflenow API
+  reference on developers.cvent.com documents raw curl only and links no SDK, helper library, or
+  Postman collection. No SDKs pointer is emitted.
+registries_checked:
+  - {registry: npm, query: jifflenow, result: 0 packages}
+  - {registry: pypi, query: jifflenow, result: 404}
+  - {registry: rubygems, query: jifflenow, result: not found}
+  - {registry: github, query: jifflenow, result: 17 third-party repos, no first-party org}

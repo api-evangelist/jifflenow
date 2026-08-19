@@ -1,0 +1,46 @@
+generated: '2026-08-13'
+method: probed
+source: live HTTP probes 2026-08-13
+note: >-
+  No .well-known document is served on any host in scope. www.jifflenow.com answers HTTP 200 to
+  EVERY path because the whole domain 302-redirects into the Cvent product page — the 200s below are
+  the Cvent marketing HTML shell, not documents, and are recorded as misses. developers.cvent.com
+  returns real 404s. The tenant API host (<companyname>.jifflenow.com) is templated and cannot be
+  probed without a customer subdomain. No WellKnown or SecurityTxt pointer is emitted: the probe
+  records an absence, and an absence must not be published as a presence.
+hosts:
+  - host: https://www.jifflenow.com
+    catch_all_200: true
+    catch_all_note: >-
+      Every /.well-known/* path 302s to
+      https://www.cvent.com/en/event-marketing-management/cvent-jifflenow and returns
+      text/html; charset=UTF-8. Treated as a soft-404 / SPA catch-all, not a served document.
+    documents:
+      - {path: /.well-known/security.txt, status: 200, content_type: text/html, served: false}
+      - {path: /.well-known/openid-configuration, status: 200, content_type: text/html, served: false}
+      - {path: /.well-known/oauth-authorization-server, status: 200, content_type: text/html, served: false}
+      - {path: /.well-known/oauth-protected-resource, status: 200, content_type: text/html, served: false}
+      - {path: /.well-known/api-catalog, status: 200, content_type: text/html, served: false}
+      - {path: /.well-known/ai-plugin.json, status: 200, content_type: text/html, served: false}
+      - {path: /.well-known/agent-card.json, status: 200, content_type: text/html, served: false}
+      - {path: /.well-known/agent.json, status: 200, content_type: text/html, served: false}
+      - {path: /llms.txt, status: 200, content_type: text/html, served: false}
+  - host: https://developers.cvent.com
+    catch_all_200: false
+    note: Documentation host for the Jifflenow API. Real 404s.
+    documents:
+      - {path: /.well-known/security.txt, status: 404, served: false}
+      - {path: /.well-known/openid-configuration, status: 404, served: false}
+      - {path: /.well-known/oauth-authorization-server, status: 404, served: false}
+      - {path: /.well-known/oauth-protected-resource, status: 404, served: false}
+      - {path: /.well-known/api-catalog, status: 404, served: false}
+      - {path: /.well-known/ai-plugin.json, status: 404, served: false}
+      - {path: /.well-known/agent-card.json, status: 404, served: false}
+      - {path: /.well-known/agent.json, status: 404, served: false}
+      - {path: /llms.txt, status: 404, served: false}
+  - host: 'https://<companyname>.jifflenow.com'
+    probed: false
+    reason: >-
+      Templated per-tenant host. There is no canonical subdomain to probe without a customer
+      instance name.
+documents_served: 0

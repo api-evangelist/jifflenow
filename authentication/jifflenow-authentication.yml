@@ -1,0 +1,58 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started
+docs: https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started
+note: >-
+  Jifflenow was acquired by Cvent in 2021. jifflenow.com now 302s to the Cvent product page, but the
+  Jifflenow REST API is still live and publicly documented on the acquirer's developer portal at
+  developers.cvent.com/docs/legacy-api/jifflenow-api/. The API host remains Jifflenow's own domain
+  (https://<companyname>.jifflenow.com/api), which is why this profile — not the Cvent profile —
+  carries the artifact. No OpenAPI is published for this API; everything below is read from the
+  human documentation.
+summary:
+  types: [oauth2]
+  api_key_in: []
+  oauth2_flows: [clientCredentials, authorizationCode]
+schemes:
+  - name: OAuth2 Client Credentials
+    type: oauth2
+    flow: clientCredentials
+    status: recommended
+    token_url: https://<companyname>.jifflenow.com/api/oauth/token
+    token_request_content_type: application/x-www-form-urlencoded
+    parameters:
+      - grant_type=client_credentials
+      - client_id
+      - client_secret
+    token_response_fields: [access_token, token_type, expires_in, scope, created_at]
+    token_type: Bearer
+    token_ttl_seconds: 1800
+    usage_header: 'Authorization: Bearer <ACCESS_TOKEN>'
+    sources: [https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started]
+  - name: OAuth2 Authorization Code (legacy)
+    type: oauth2
+    flow: authorizationCode
+    status: deprecated
+    note: >-
+      The docs state "Authorization Code Grant is deprecated. All new integrations should use the
+      Client Credentials Flow." The authorization-code flow additionally requires an
+      X-Integration-User-Id request header naming the integration user; the client-credentials flow
+      does not.
+    sources: [https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started]
+request_headers:
+  - name: Authorization
+    required: true
+    value: Bearer {access_token}
+  - name: X-Integration-User-Id
+    required: conditional
+    value: UUID of the integration user
+    note: Required only with the deprecated authorization-code flow, not with client credentials.
+credential_issuance:
+  self_service: false
+  path: >-
+    Settings (Company Homepage) -> Integrations -> + New Integration -> "Jifflenow REST APIs".
+    The side panel exposes Client ID, Client Secret and Subdomain. Requires the "Can manage
+    integrations" privilege inside a Jifflenow tenant.
+  per_event_activation: 'Event > Settings > Integrations'
+  support_contact: jn-support@cvent.com
+  docs: https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started

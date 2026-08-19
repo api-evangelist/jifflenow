@@ -1,0 +1,61 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/api-request-response
+format: custom
+format_note: >-
+  Not RFC 9457. Jifflenow returns application/json with a fixed envelope
+  {status, message, data, errors, request_uuid}; the `status` element repeats the HTTP-like code and
+  `errors` carries field-level detail. There is no `type` URI, no `title`/`detail` split, and no
+  application/problem+json media type anywhere in the reference.
+envelope:
+  status_field: status
+  message_field: message
+  errors_field: errors
+  trace_field: request_uuid
+problems:
+  - status: 200
+    title: OK
+    description: The request was successful, and the server returned the expected response.
+    source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/api-request-response
+  - status: 400
+    title: Bad Request
+    description: The request contains invalid parameters or fails validation checks.
+    observed_variants:
+      - one or more required fields missing/invalid
+      - invalid event_system_name or malformed payload
+      - invalid event_system_name or meeting_type_uuid
+      - invalid UUID or invalid/missing field formats
+      - invalid query parameter or event
+      - validation failed or event not found
+      - invalid or no users passed
+      - shared link not found
+    source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/api-request-response
+  - status: 401
+    title: Unauthorized
+    description: Credentials invalid or missing.
+    note: >-
+      Documented on the individual operation pages ("Other Responses" tables) rather than in the
+      global status-code table.
+    source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/event/events-list
+  - status: 403
+    title: Forbidden
+    description: The request is valid, but the user does not have the necessary permissions.
+    source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/api-request-response
+  - status: 404
+    title: Not Found
+    description: The requested resource does not exist on the server.
+    source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/api-request-response
+  - status: 406
+    title: Not Acceptable
+    description: >-
+      Returned when the requested content type is not acceptable (for example the client requests
+      XML but the server supports only JSON). The docs note that for status conflicts 409 Conflict
+      is the more appropriate code.
+    source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/api-request-response
+  - status: 500
+    title: Internal Server Error
+    description: A generic error indicating something went wrong on the server side.
+    source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/api-request-response
+gaps:
+  - No machine-readable error code registry (no symbolic error codes, only HTTP-like status values).
+  - No documented retry guidance or Retry-After semantics.

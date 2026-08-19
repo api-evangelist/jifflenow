@@ -1,0 +1,21 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/introduction
+limit_count: 0
+limits: []
+response_headers: []
+exhaustion_status: null
+note: >-
+  No published rate limits. Every page of the Jifflenow API reference on developers.cvent.com was
+  read (introduction, getting-started, api-request-response, and all 20 operation pages) and none
+  mentions a rate limit, quota, throttle, burst allowance, 429 response, Retry-After header, or
+  X-RateLimit-*/RateLimit-* header. The global status-code table stops at 500 and does not list 429.
+  The docs do reference "fair usage guidelines" in the usage-and-access section without publishing
+  any number. Limits could not be observed live either: every operation requires a tenant-issued
+  OAuth client credential, so there is no unauthenticated response to read headers from. Recorded as
+  an honest zero.
+evidence:
+  - url: https://developers.cvent.com/docs/legacy-api/jifflenow-api/api-request-response
+    status: 200
+  - url: https://developers.cvent.com/docs/legacy-api/jifflenow-api/introduction
+    status: 200

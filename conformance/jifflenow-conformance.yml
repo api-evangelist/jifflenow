@@ -1,0 +1,60 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      OAuth 2.0 client-credentials grant documented with a token endpoint
+      (POST /api/oauth/token), form-encoded grant_type/client_id/client_secret, and a
+      standard token response (access_token, token_type: Bearer, expires_in, scope, created_at).
+      An authorization-code grant is also documented and marked deprecated.
+    source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started
+  - id: rfc6750-bearer-token
+    conforms: true
+    evidence: 'Access token presented as "Authorization: Bearer <ACCESS_TOKEN>" on every request.'
+    source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started
+  - id: oidc
+    conforms: false
+    evidence: >-
+      No OpenID Connect discovery, no id_token, no /.well-known/openid-configuration on any host
+      in scope.
+  - id: rfc8414-oauth-authorization-server-metadata
+    conforms: false
+    evidence: /.well-known/oauth-authorization-server returns no document on any probed host.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Errors use a custom JSON envelope {status, message, data, errors, request_uuid}; no
+      application/problem+json media type and no type/title/detail members.
+  - id: json-api
+    conforms: false
+    evidence: Custom envelope, not JSON:API document structure.
+  - id: openapi
+    conforms: false
+    evidence: >-
+      No OpenAPI or Swagger document is published for the Jifflenow API anywhere on
+      developers.cvent.com or on any jifflenow.com host. The reference is human-readable HTML only.
+  - id: asyncapi
+    conforms: false
+    evidence: No event, streaming, or webhook surface is documented for this API.
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: No Sunset or Deprecation header support documented.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: No /.well-known/security.txt served on any host in scope.
+  - id: pagination
+    conforms: true
+    evidence: >-
+      Page-number pagination via api_params[page] / api_params[per_page], with current_page,
+      total_pages, total_entries and total_records returned in the response body.
+    source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/meeting/meetings-entity
+  - id: idempotency
+    conforms: false
+    evidence: No idempotency key or replay-safety contract documented on any write operation.
+compliance_programs:
+  note: >-
+    Jifflenow publishes no compliance program of its own. Certifications are Cvent's, held at the
+    parent level and recorded in security/jifflenow-trust-center.yml (SOC 2, ISO 27001, PCI DSS,
+    GDPR, CSA STAR) from https://www.cvent.com/en/trust.

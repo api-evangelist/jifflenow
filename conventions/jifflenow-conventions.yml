@@ -1,0 +1,101 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/api-request-response
+docs:
+  - https://developers.cvent.com/docs/legacy-api/jifflenow-api/api-request-response
+  - https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started
+  - https://developers.cvent.com/docs/legacy-api/jifflenow-api/introduction
+url_scheme:
+  protocol: https
+  host: '<companyname>.jifflenow.com'
+  host_note: >-
+    Templated per tenant. <companyname> is the organization's unique Jifflenow subdomain, issued
+    with the integration credentials.
+  base_path: /api
+  operation_prefix: /api/adapter
+  consumes: application/json
+  produces: application/json
+authentication:
+  style: oauth2-client-credentials-bearer
+  header: 'Authorization: Bearer <ACCESS_TOKEN>'
+  token_ttl_seconds: 1800
+  detail: authentication/jifflenow-authentication.yml
+tenancy:
+  event_scoping: >-
+    Most operations are scoped to a single event through an {event_system_name} path segment, which
+    the admin copies out of the event URL at integration setup. Company-wide operations
+    (events_list, users, event-level badge scan) omit it.
+response_envelope:
+  shape: custom
+  fields:
+    - name: status
+      type: integer
+      description: HTTP-like status code repeated inside the body; 200 means success.
+    - name: message
+      type: string
+      description: Human-readable confirmation or error summary.
+    - name: data
+      type: array|object
+      description: The payload. May be empty or carry one or more records.
+    - name: errors
+      type: object
+      description: Field-level errors; empty when the request succeeds.
+    - name: request_uuid
+      type: string
+      description: Unique identifier for tracing this API request.
+  example_request_uuid: ExternalAPI-cmb82ukji01a7qilv16ai7033-20250528150530
+  note: >-
+    The transport status code is mirrored into the body's `status` field. Clients are documented
+    against the body value, not only the HTTP status line.
+request_tracing:
+  supported: true
+  mechanism: response body field
+  field: request_uuid
+  request_header: null
+pagination:
+  style: page-number
+  parameters:
+    - 'api_params[page]'
+    - 'api_params[per_page]'
+  parameter_encoding: bracketed query parameters under an api_params[] namespace
+  response_fields:
+    - data.current_page
+    - data.total_pages
+    - data.total_entries
+    - data.total_records
+  cursor: false
+  sync_fields:
+    - data.last_sync_at
+    - data.event_time_zone
+    - data.meeting_time_zone
+filtering:
+  encoding: 'api_params[<filter>] query parameters'
+  examples:
+    - 'api_params[past_events]'
+    - 'api_params[include_sandbox]'
+    - 'api_params[user-emails]'
+    - 'api_params[include_details]'
+    - 'api_params[all]'
+idempotency:
+  supported: false
+  note: >-
+    No idempotency key, request-replay contract, or safe-retry guidance appears anywhere in the
+    published Jifflenow reference. Recorded as absent rather than assumed; no Idempotency pointer is
+    emitted for this provider.
+versioning:
+  scheme: none
+  detail: >-
+    The documented paths carry no version segment (/api/adapter/...). No version header, no dated
+    version train, and no version negotiation is described. The API is filed by Cvent under
+    "Legacy API".
+  docs: https://developers.cvent.com/docs/legacy-api/jifflenow-api/introduction
+rate_limit_signaling:
+  documented: false
+  detail: rate-limits/jifflenow-rate-limits.yml
+error_semantics:
+  detail: errors/jifflenow-problem-types.yml
+  format: custom envelope (not RFC 9457 application/problem+json)
+lifecycle:
+  detail: lifecycle/jifflenow-lifecycle.yml
+sandbox:
+  detail: sandbox/jifflenow-sandbox.yml

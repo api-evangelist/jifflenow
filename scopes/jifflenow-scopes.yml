@@ -1,0 +1,29 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started
+docs: https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started
+note: >-
+  Jifflenow documents OAuth 2.0 but publishes no scope reference page and no OpenAPI, so there is no
+  enumerable scope catalog. Scopes are granted implicitly: at integration setup the tenant admin
+  picks which Jifflenow APIs the integration may call and the docs state that this "adds the
+  required scopes to your credentials". The only scope value the documentation actually shows is the
+  one returned in the sample token response.
+schemes:
+  - name: OAuth2 Client Credentials
+    source: https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started
+    flows:
+      - flow: clientCredentials
+        tokenUrl: https://<companyname>.jifflenow.com/api/oauth/token
+scopes:
+  - scope: public
+    description: >-
+      The scope value shown in the documented sample token response. The docs gloss it as "limited
+      access to public resources". No other scope string appears anywhere in the published reference.
+    flows: [clientCredentials]
+    sources: [https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started]
+scope_model:
+  enumerable: false
+  granted_by: >-
+    Per-integration API selection in the Jifflenow admin UI (Settings -> Integrations), not by a
+    scope string the client requests.
+  reference_page: null
