@@ -44,6 +44,19 @@ modified: '2026-08-13'
 tags:
 - Company
 - Automation
+- Event
+- Meetings
+- Scheduling
+- Event Marketing
+- B2B
+- Sales
+- Trade Shows
+- Meeting Automation
+- Appointments
+- Badge Scanning
+tags_raw:
+- Company
+- Automation
 - Events
 - Meetings
 - Scheduling
@@ -69,6 +82,13 @@ apis:
   humanURL: https://developers.cvent.com/docs/legacy-api/jifflenow-api/introduction
   baseURL: https://<companyname>.jifflenow.com/api
   tags:
+  - Meetings
+  - Event
+  - Scheduling
+  - User
+  - Sessions
+  - Badge Scanning
+  tags_raw:
   - Meetings
   - Events
   - Scheduling
