@@ -21,6 +21,7 @@ accessModel:
   source:
   - https://developers.cvent.com/docs/legacy-api/jifflenow-api/introduction
   - https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started
+  - {url: 'https://www.jifflenow.com', status: 301, note: 'declared website redirects to https://www.cvent.com/en/event-marketing-management/cvent-jifflenow — a different registrable domain (jifflenow.com -> cvent.com), possible rename or acquisition (probed 2026-09-03, roadmap#169)'}
   generated: '2026-08-13'
   method: searched
   note: >-
