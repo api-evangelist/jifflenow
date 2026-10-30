@@ -64,6 +64,112 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Jifflenow is a company surfaced as a portfolio company of accel and added to the API Evangelist network as a stub for enrichment. Sector: automation. This profile is a lead awaiting the enrichment pipeline.
+Jifflenow is a B2B meeting automation and scheduling platform for trade shows, conferences, and corporate events, now part of Cvent (acquired 2021) as Cvent Jifflenow. It lets sales and event teams request, approve, and confirm meetings before attendees arrive on the show floor, with automated routing and notifications, a unified calendar that combines customer meetings and internal staff activities, on-site mobile check-in and no-show tracking, and reporting dashboards that tie meeting volume and outcomes back to pipeline. It integrates with Salesforce (native CRM sync of accounts, opportunities, campaigns, and leads), Outlook, and iCapture badge scanning. The standalone jifflenow.com now redirects to Cvent, but the Jifflenow REST API remains live and publicly documented on the acquirer's developer portal at developers.cvent.com under its legacy-API section: roughly twenty JSON operations over events, meetings, sessions, meeting types, users, calendar blocks, event topics, badge-scan ingestion, and shared meeting links, served from a per-tenant https://<companyname>.jifflenow.com/api host and secured with OAuth 2.0 client credentials. No OpenAPI, SDK, webhook surface, or agent surface is published for it.
 
-Backed by: accel — http://www.jifflenow.com
+**Areas:** Company · Automation · Event · Meetings · Scheduling · Event Marketing · B2B · Sales · Trade Shows · Meeting Automation · Appointments · Badge Scanning
+
+## Jifflenow on APIs.io
+
+Everything profiled for Jifflenow is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/jifflenow/](https://apis.io/providers/jifflenow/)** — or go straight to one of the APIs or properties below.
+
+### APIs (1)
+
+- [Jifflenow REST API](https://apis.io/apis/jifflenow/jifflenow-rest-api/) — The Jifflenow REST API exposes the meeting-automation core of Cvent Jifflenow as JSON over HTTPS. Documented modules cover user management (list users, push…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Jifflenow Authentication](https://apis.io/security/jifflenow/jifflenow-authentication/)
+- [Jifflenow Domain Security](https://apis.io/security/jifflenow/jifflenow-domain-security/)
+- [Jifflenow Trust Center](https://apis.io/security/jifflenow/jifflenow-trust-center/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Jifflenow Scopes](https://apis.io/scopes/jifflenow/jifflenow-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Jifflenow Plans Pricing](https://apis.io/plans/jifflenow/jifflenow-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Jifflenow Rate Limits](https://apis.io/rate-limits/jifflenow/jifflenow-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.jifflenow.com)
+- [Documentation](https://developers.cvent.com/docs/legacy-api/jifflenow-api/introduction)
+- [Getting started](https://developers.cvent.com/docs/legacy-api/jifflenow-api/getting-started)
+- [API reference](https://developers.cvent.com/docs/legacy-api/jifflenow-api/api-request-response)
+- [Pricing](https://www.cvent.com/en/event-management-software/cvent-pricing)
+- [Support](https://support.cvent.com/)
+- [Compliance](https://www.cvent.com/en/trust)
+- [Terms of service](https://www.cvent.com/en/company/legal)
+- [Privacy policy](https://www.cvent.com/en/privacy-policy)
+- [Status](https://status.cvent.com)
+
+## API Evangelist rating
+
+**Kin Score 36.3** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 15.8 |
+| Developer ergonomics | 61.9 |
+| Access clarity | 47.4 |
+
+**Agent readiness 7.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 39.2** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/jifflenow/](https://apis.io/providers/jifflenow/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Jifflenow: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/jifflenow/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
